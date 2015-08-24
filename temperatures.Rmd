@@ -32,21 +32,30 @@ library(tidyr)
 library(ggplot2)
 ```
 
-You can also embed plots, for example:
+Restructuring the data so it plays nice with ggplot2
 
-```{r, fig.width=10, fig.height=6, warning=FALSE}
-# Restructuring the data so it plays nice with ggplot2
+```{r}
 airp2 <- gather(airp, "type", "temp", 4:11)
+```
 
-# function to turn y-axis labels into degree formatted values
+Function to turn y-axis labels into degree formatted values and set the range from -20 to 100.
+
+```{r}
 dgr_fmt <- function(x, ...) {
   parse(text = paste(x, "*degree", sep = ""))
 }
 a <- dgr_fmt(seq(-20,100, by=10))
+```
 
-# Bringing in a package that will allow use of Google fonts
+Bringing in a package that will allow use of Google fonts to match TrendCT style.
+
+```{r}
 library(extrafont)
+```
 
+Now plotting the chart layer by layer with geom_linerange()
+
+```{r, fig.width=10, fig.height=6, warning=FALSE}
 p <- ggplot(airp, aes(row, average_min_temp)) +
   theme(plot.background = element_blank(),
         panel.grid.minor = element_blank(),

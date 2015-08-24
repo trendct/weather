@@ -196,19 +196,17 @@ kable(head(airp))</code></pre>
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(tidyr)
 library(ggplot2)</code></pre>
-<p>You can also embed plots, for example:</p>
-<pre class="r"><code># Restructuring the data so it plays nice with ggplot2
-airp2 &lt;- gather(airp, &quot;type&quot;, &quot;temp&quot;, 4:11)
-
-# function to turn y-axis labels into degree formatted values
-dgr_fmt &lt;- function(x, ...) {
+<p>Restructuring the data so it plays nice with ggplot2</p>
+<pre class="r"><code>airp2 &lt;- gather(airp, &quot;type&quot;, &quot;temp&quot;, 4:11)</code></pre>
+<p>Function to turn y-axis labels into degree formatted values and set the range from -20 to 100.</p>
+<pre class="r"><code>dgr_fmt &lt;- function(x, ...) {
   parse(text = paste(x, &quot;*degree&quot;, sep = &quot;&quot;))
 }
-a &lt;- dgr_fmt(seq(-20,100, by=10))
-
-# Bringing in a package that will allow use of Google fonts
-library(extrafont)</code></pre>
+a &lt;- dgr_fmt(seq(-20,100, by=10))</code></pre>
+<p>Bringing in a package that will allow use of Google fonts to match TrendCT style.</p>
+<pre class="r"><code>library(extrafont)</code></pre>
 <pre><code>## Registering fonts with R</code></pre>
+<p>Now plotting the chart layer by layer with geom_linerange()</p>
 <pre class="r"><code>p &lt;- ggplot(airp, aes(row, average_min_temp)) +
   theme(plot.background = element_blank(),
         panel.grid.minor = element_blank(),

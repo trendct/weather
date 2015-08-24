@@ -16,13 +16,13 @@ library(ggplot2)
 # New London, KGON
 
 # Pull in the weather data that you scraped from Weather Underground
-airp <- read.csv("KGON.csv", stringsAsFactors=FALSE)
+airp <- read.csv("KHVN.csv", stringsAsFactors=FALSE)
 
 # Restructuring the data so it plays nice with ggplot2
 airp2 <- gather(airp, "type", "temp", 4:12)
 
 # Label the town for the chart title
-town <- "New London"
+town <- "New Haven"
 
 # function to turn y-axis labels into degree formatted values
 dgr_fmt <- function(x, ...) {
@@ -119,8 +119,8 @@ rhigh3 <- airp[airp$actual_max_temp>=airp$record_max_temp,]
 
 # Adding them to the chart with specific colors
 p <- p +
-  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue3") +
-  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red3")
+  geom_point(data=rlow3, aes(x=row, y=record_min_temp), colour="blue1") +
+  geom_point(data=rhigh3, aes(x=row, y=record_max_temp), colour="red1")
 
 # Adding a title based on the variable set above
 title <- paste0(town, "'s weather since summer 2014")
